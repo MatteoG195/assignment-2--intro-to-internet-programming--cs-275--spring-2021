@@ -8,14 +8,14 @@
   <body>
     <h1>Rice Recipes</h1>
     <p>Select your grain:</p>
-    <rice class = "rice-type" name="rice-type">
-      <input type="radio" id="sprouted-cali" name="rice" onclick="updateForm();" value="0" checked>
-        <label for="sprouted-cali">Sprouted California</label>
-      <input type="radio" id="white" name="rice" onclick="updateForm();" value="1">
-        <label for="white">White</label><br><br>
-    </rice>
+
+    <input type="radio" id="sprouted-cali" name="rice" onclick="updateForm();" value="0" checked>
+      <label for="sprouted-cali">Sprouted California</label>
+    <input type="radio" id="white" name="rice" onclick="updateForm();" value="1">
+      <label for="white">White</label><br><br>
+
     <label for="cups">How many cups of rice? (0-100):</label><br>
     <input type="number" id="cups" name ="cups" min="0" max="100"><br><br>
-    <recipe></recipe>
+    <p id="recipe"></p>
   </body>
 </html>
