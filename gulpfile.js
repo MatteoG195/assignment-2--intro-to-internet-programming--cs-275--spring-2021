@@ -1,5 +1,6 @@
 const { src, dest, series, watch } = require(`gulp`);
 const babel = require(`gulp-babel`);
+const cssLinter = require(`gulp-stylelint`);
 const htmlCompressor = require(`gulp-htmlmin`);
 const htmlValidator = require(`gulp-html`);
 const jsLinter = require(`gulp-eslint`);
@@ -19,21 +20,23 @@ let compressHTML = () => {
 };
 
 let compileCSSForDev = () => {
-    return src(`css/main.css`)
-        .pipe(css({
-            outputStyle: `expanded`,
-            precision: 10
-        }).on(`error`, sass.logError))
-        .pipe(dest(`temp/css`));
+    return src(`css/*.css`)
+        .pipe(cssLinter({
+            failAfterError: true,
+            reporters: [
+                {formatter: `verbose`, console: true}
+            ]
+        }));pipe(dest(`temp/css`));
 };
 
 let compileCSSForProd = () => {
-    return src(`css/main.css`)
-        .pipe(css({
-            outputStyle: `compressed`,
-            precision: 10
-        }).on(`error`, sass.logError))
-        .pipe(dest(`prod/css`));
+    return src(`css/*.css`)
+        .pipe(cssLinter({
+            failAfterError: true,
+            reporters: [
+                {formatter: `verbose`, console: true}
+            ]
+        })).pipe(dest(`prod/css`));
 };
 
 let transpileJSForDev = () => {
