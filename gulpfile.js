@@ -4,14 +4,28 @@ const cssLinter = require(`gulp-stylelint`);
 const htmlCompressor = require(`gulp-htmlmin`);
 const htmlValidator = require(`gulp-html`);
 const jsLinter = require(`gulp-eslint`);
+const jsCompressor = require(`@babel/core`);
+const browserSync = require(`browser-sync`);
+const reload = browserSync.reload;
+/*
+#### Development
+* Ensure your editor is configured to use the enclosed `.editorconfig` file.
+* Your HTML must validate via the `gulp-html` module.
+* Your CSS must validate via the `gulp-stylelint` module using the enclosed `.stylelintrc.json` file.
+* Your JavaScript must validate via the `gulp-eslint` module using the included `.eslintrc.json` file.
+* Your JavaScript must transpile using `gulp-babel`, and, possibly, `@babel/core` and `babel-present-env`.
+* The development track must lint/validate HTML, CSS, and JavaScript each time you save an `.html`, `.css`, or `.js` file. It must also refresh the browser when any of these files have changed.
+* `gulp dev` must trigger the development track.
+*/
 
-
+//validates html
 let validateHTML = () => {
     return src([
         `html/*.html`,
         `html/**/*.html`])
         .pipe(htmlValidator());
 };
+
 
 let compressHTML = () => {
     return src([`html/*.html`,`html/**/*.html`])
@@ -77,7 +91,8 @@ let lintJS = () => {
         .pipe(jsLinter.formatEach(`compact`, process.stderr));
 };
 
-let serve = () => {
+
+let dev = () => {
     browserSync({
         notify: true,
         port: 9000,
@@ -111,9 +126,14 @@ exports.compileCSSForProd = compileCSSForProd;
 exports.transpileJSForDev = transpileJSForDev;
 exports.transpileJSForProd = transpileJSForProd;
 exports.lintJS = lintJS;
+exports.dev = series(validateHTML,
+    compileCSSForDev,
+    lintJS,
+    transpileJSForDev,
+    dev
+);
 exports.build = series(
     compressHTML,
     compileCSSForProd,
     transpileJSForProd
 );
-exports.serve = series(validateHTML,compressHTML,compileCSSForDev,serve);

@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "* **Do not start this project until you have read these instructions carefully.**  \r * **Read these instructions repeatedly until you understand, then begin your project. If something is not clear, ask.**",
   "main": "gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "browser-sync": "^2.26.14",
+    "stylelint-config-standard": "^21.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,11 +23,15 @@
   },
   "homepage": "https://github.com/MatteoG195/assignment-2--intro-to-internet-programming--cs-275--spring-2021#readme",
   "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "babel": "^6.23.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-eslint": "^5.0.0",
     "gulp-html": "^3.3.0",
     "gulp-htmlmin": "^5.0.1",
-    "gulp-util": "^3.0.8"
+    "gulp-stylelint": "^13.0.0",
+    "gulp-util": "^3.0.8",
+    "stylelint": "^13.12.0"
   }
 }
