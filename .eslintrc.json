@@ -6,7 +6,7 @@
   "rules": {
     "no-console": 0,
     "no-debugger": 0,
-    "indent": [2, 4, {"SwitchCase": 1}],
+    "indent": ["error", "tab", {"SwitchCase": 1}],
     "quotes": [2, "backtick"],
     "linebreak-style": [2, "unix"],
     "semi": [2, "always"],
