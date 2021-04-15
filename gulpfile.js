@@ -4,7 +4,7 @@ const cssLinter = require(`gulp-stylelint`);
 const htmlCompressor = require(`gulp-htmlmin`);
 const htmlValidator = require(`gulp-html`);
 const jsLinter = require(`gulp-eslint`);
-const jsCompressor = require(`@babel/core`);
+const jsCompressor = require(`gulp-uglify`);
 const browserSync = require(`browser-sync`);
 const reload = browserSync.reload;
 /*
