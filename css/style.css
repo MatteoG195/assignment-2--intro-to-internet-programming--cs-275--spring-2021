@@ -4,6 +4,15 @@ html {
   margin:4px;
 }
 
+button {
+  height:30%;
+  width:10%;
+}
+
+input {
+  width:10%;
+}
+
 h1 {
   font-size:32px;
   font-weight:bold;

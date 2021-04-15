@@ -7,18 +7,14 @@
   </head>
   <body>
     <h1>Rice Recipes</h1>
-    <p>Select your grain:</p>
-    <form>
-      <input type="radio" id="sprouted-cali" name="rice" value=0 checked>
-        <label for="sprouted-cali">Sprouted California</label>
-      <input type="radio" id="white" name="rice" value=1>
-        <label for="white">White</label><br><br>
-
-      <label for="cups">How many cups of rice? (0-100)</label><br>
+    <div>
+      <p>Select your grain:</p>
+      <button id="cali">Sprouted California</button>
+      <button id="white">White Rice</button><br><br>
+    </div>
+    <label for="cups">How many cups of rice? (0-100)</label><br>
       <input type="number" id="cups" name ="cups" min="0" max="100"><br><br>
-      <button type="button">Get recipe</button>
-      <p id="recipe"></p>
-    </form>
+    <p id="recipe"></p>
     <script src="app.js"></script>
   </body>
 </html>
