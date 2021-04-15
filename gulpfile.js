@@ -1,6 +1,7 @@
 const { src, dest, series, watch } = require(`gulp`);
 const babel = require(`gulp-babel`);
 const cssLinter = require(`gulp-stylelint`);
+const cssCompressor = require(`gulp-clean-css`);
 const htmlCompressor = require(`gulp-htmlmin`);
 const htmlValidator = require(`gulp-html`);
 const jsLinter = require(`gulp-eslint`);
@@ -18,7 +19,6 @@ const reload = browserSync.reload;
 * `gulp dev` must trigger the development track.
 */
 
-//validates html
 let validateHTML = () => {
     return src([
         `html/*.html`,
@@ -26,31 +26,10 @@ let validateHTML = () => {
         .pipe(htmlValidator());
 };
 
-
 let compressHTML = () => {
     return src([`html/*.html`,`html/**/*.html`])
         .pipe(htmlCompressor({collapseWhitespace: true}))
         .pipe(dest(`prod`));
-};
-
-let compileCSSForDev = () => {
-    return src(`css/*.css`)
-        .pipe(cssLinter({
-            failAfterError: true,
-            reporters: [
-                {formatter: `verbose`, console: true}
-            ]
-        }));pipe(dest(`temp/css`));
-};
-
-let compileCSSForProd = () => {
-    return src(`css/*.css`)
-        .pipe(cssLinter({
-            failAfterError: true,
-            reporters: [
-                {formatter: `verbose`, console: true}
-            ]
-        })).pipe(dest(`prod/css`));
 };
 
 let transpileJSForDev = () => {
@@ -64,7 +43,15 @@ let transpileJSForProd = () => {
         .pipe(babel())
         .pipe(jsCompressor())
         .pipe(dest(`prod/js`));
+};
 
+/*
+TODO: Transpile CSS for production, complete prod scaffold
+*/
+let transpileCSSForProd = () => {
+    return src(`css/*.css`)
+        .pipe(cssCompressor())
+        .pipe(dest(`prod/css`));
 };
 
 let lintJS = () => {
@@ -120,19 +107,17 @@ let dev = () => {
 
 exports.validateHTML = validateHTML;
 exports.compressHTML = compressHTML;
-exports.compileCSSForDev = compileCSSForDev;
-exports.compileCSSForProd = compileCSSForProd;
 exports.transpileJSForDev = transpileJSForDev;
 exports.transpileJSForProd = transpileJSForProd;
 exports.lintJS = lintJS;
-exports.dev = series(validateHTML,
-    compileCSSForDev,
+exports.dev = series(
+    validateHTML,
     lintJS,
     transpileJSForDev,
     dev
 );
 exports.build = series(
     compressHTML,
-    compileCSSForProd,
-    transpileJSForProd
+    transpileJSForProd,
+    transpileCSSForProd
 );
