@@ -99,9 +99,8 @@ let dev = () => {
         reloadDelay: 50,
         server: {
             baseDir: [
-                './html',
-                './js',
-                './css'
+                'html',
+                './'
             ]
         }
     });
