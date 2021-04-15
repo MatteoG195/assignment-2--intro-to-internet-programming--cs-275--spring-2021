@@ -5,12 +5,22 @@ window.onload = () => {
     let btncali = document.getElementById(`cali`);
     let amntRice = document.getElementById(`cups`);
     let recipe = document.getElementById(`recipe`);
+    let status = `cali`;
     btnwhite.addEventListener(`click`, () => {
+        status = `white`;
         recipe.innerHTML = setWhiteRecipe(amntRice.value);
     });
     btncali.addEventListener(`click`, () => {
+        status = `cali`;
         recipe.innerHTML = setCaliRecipe(amntRice.value);
     });
+
+    /*amntRice.addEventListener( `update`, () =>{
+        if(status.equals(`cali`))
+            setCaliRecipe(amntRice.value);
+        else
+            setWhiteRecipe(amntRice.value);
+    });*/
 
     function setCaliRecipe(amnt) {
         let ratio = amnt/1.25;

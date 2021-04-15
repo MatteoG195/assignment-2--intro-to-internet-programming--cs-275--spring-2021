@@ -45,6 +45,12 @@ let transpileJSForProd = () => {
         .pipe(dest(`prod/js`));
 };
 
+
+let lintCSS = () => {
+    return src(`css/*.css`)
+    .pipe(cssLinter())
+    .pipe(dest(`temp/css`));
+};
 /*
 TODO: Transpile CSS for production, complete prod scaffold
 */
@@ -97,7 +103,7 @@ let dev = () => {
     ).on(`change`, reload);
 
     watch(`css/**/*.css`,
-        series(compileCSSForDev)
+        series(lintCSS)
     ).on(`change`, reload);
 
     watch(`html/**/*.html`,
@@ -110,6 +116,8 @@ exports.compressHTML = compressHTML;
 exports.transpileJSForDev = transpileJSForDev;
 exports.transpileJSForProd = transpileJSForProd;
 exports.lintJS = lintJS;
+exports.lintCSS = lintCSS;
+exports.transpileCSSForProd = transpileCSSForProd;
 exports.dev = series(
     validateHTML,
     lintJS,
